@@ -1,0 +1,321 @@
+<title>Rad Valance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  @font-face {
+    font-family: "Reservoir Grunge";
+    src: url("reservoirgrunge.ttf") format("truetype");
+    font-weight: 400;
+    font-display: swap;
+  }
+
+  :root {
+    --ink: #000000;
+    --surface: #161616;
+    --line: #3a3a3a77;
+    --paper: #f4efe9;
+    --muted: #a8a8a8;
+    --red: #e0453c;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(28px, 6vw, 64px) 20px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  .bokeh {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.28;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .bokeh.b1 { width: 340px; height: 340px; background: var(--red); top: -90px; left: -110px; }
+  .bokeh.b2 { width: 300px; height: 300px; background: var(--red); bottom: -100px; right: -90px; }
+  .bokeh.b3 { width: 220px; height: 220px; background: var(--red); top: 45%; right: -80px; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .bokeh { animation: drift 16s ease-in-out infinite alternate; }
+    .bokeh.b2 { animation-duration: 19s; }
+    .bokeh.b3 { animation-duration: 13s; }
+  }
+  @keyframes drift {
+    from { transform: translate(0, 0) scale(1); }
+    to   { transform: translate(18px, -14px) scale(1.06); }
+  }
+
+  main.card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .frame {
+    position: relative;
+    width: 108px;
+    height: 108px;
+  }
+
+  .avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 22px;
+    background: transparent;
+    border: 2px solid #ffffff;
+    display: block;
+    object-fit: cover;
+    object-position: 50% 15%;
+    color: var(--paper);
+    filter:
+      drop-shadow(0 0 3px rgba(255, 255, 255, 0.35))
+      drop-shadow(0 0 8px rgba(255, 255, 255, 0.2))
+      drop-shadow(0 0 16px rgba(255, 255, 255, 0.12));
+  }
+
+  .corner {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--red);
+    opacity: 0.9;
+  }
+  .corner.tl { top: -8px; left: -8px; border-right: none; border-bottom: none; border-radius: 4px 0 0 0; }
+  .corner.tr { top: -8px; right: -8px; border-left: none; border-bottom: none; border-radius: 0 4px 0 0; }
+  .corner.bl { bottom: -8px; left: -8px; border-right: none; border-top: none; border-radius: 0 0 0 4px; }
+  .corner.br { bottom: -8px; right: -8px; border-left: none; border-top: none; border-radius: 0 0 4px 0; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .corner.tl { animation: snap-tl 0.6s cubic-bezier(.2,.9,.25,1) both; }
+    .corner.tr { animation: snap-tr 0.6s cubic-bezier(.2,.9,.25,1) both; animation-delay: 0.06s; }
+    .corner.bl { animation: snap-bl 0.6s cubic-bezier(.2,.9,.25,1) both; animation-delay: 0.06s; }
+    .corner.br { animation: snap-br 0.6s cubic-bezier(.2,.9,.25,1) both; animation-delay: 0.12s; }
+  }
+  @keyframes snap-tl { from { transform: translate(-10px, -10px); opacity: 0; } to { transform: none; opacity: 0.9; } }
+  @keyframes snap-tr { from { transform: translate(10px, -10px); opacity: 0; } to { transform: none; opacity: 0.9; } }
+  @keyframes snap-bl { from { transform: translate(-10px, 10px); opacity: 0; } to { transform: none; opacity: 0.9; } }
+  @keyframes snap-br { from { transform: translate(10px, 10px); opacity: 0; } to { transform: none; opacity: 0.9; } }
+
+  .rec {
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--ink);
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+  .rec .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--red);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .rec .dot { animation: pulse 1.8s ease-in-out infinite; }
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+  h1 {
+    font-family: "Reservoir Grunge", "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 400;
+    font-size: clamp(2.6rem, 9vw, 3.4rem);
+    letter-spacing: 0.02em;
+    margin: 0;
+    text-align: center;
+    text-wrap: balance;
+    text-transform: uppercase;
+  }
+
+  .hub-subtitle {
+    margin: -10px 0 0;
+    color: var(--muted);
+    font-size: 0.85rem;
+    text-align: center;
+    letter-spacing: 0.02em;
+  }
+
+  .socials {
+    display: flex;
+    gap: 12px;
+  }
+
+  .social-icon {
+    all: unset;
+    box-sizing: border-box;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.16s ease, border-color 0.16s ease, color 0.16s ease;
+  }
+  .social-icon svg { width: 19px; height: 19px; }
+  .social-icon:hover { color: var(--paper); border-color: var(--paper); transform: translateY(-2px); }
+  .social-icon:focus-visible { outline: 2px solid var(--paper); outline-offset: 3px; }
+  .social-icon[aria-disabled="true"] {
+    opacity: 0.45;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .links {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .link-card {
+    all: unset;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px 18px;
+    cursor: pointer;
+    transition: transform 0.16s ease, border-color 0.16s ease, background 0.16s ease;
+  }
+  .link-card:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); }
+  .link-card:focus-visible { outline: 2px solid var(--paper); outline-offset: 3px; }
+  .link-card:active { transform: translateY(0); }
+
+  .bar {
+    width: 4px;
+    align-self: stretch;
+    border-radius: 3px;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .link-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+    text-align: left;
+  }
+
+  .link-label {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  .link-title {
+    font-family: "Bahnschrift", "Barlow Semi Condensed", "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: var(--paper);
+    text-transform: uppercase;
+  }
+
+  .link-state {
+    font-size: 0.82rem;
+    color: var(--accent);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+</style>
+
+<div class="bokeh b1"></div>
+<div class="bokeh b2"></div>
+<div class="bokeh b3"></div>
+
+<main class="card">
+  <div class="frame">
+    <span class="corner tl"></span>
+    <span class="corner tr"></span>
+    <span class="corner bl"></span>
+    <span class="corner br"></span>
+    <img class="avatar" src="avatar2.png" alt="Rad Valance">
+    <span class="rec"><span class="dot"></span>rec</span>
+  </div>
+
+  <h1>Rad Valance</h1>
+  <p class="hub-subtitle">content creator + fashion designer + actor</p>
+
+  <div class="socials">
+    <a class="social-icon" href="https://www.instagram.com/radvalance/" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+        <circle cx="12" cy="12" r="4"></circle>
+        <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"></circle>
+      </svg>
+    </a>
+    <a class="social-icon" href="https://www.tiktok.com/@radvalance" target="_blank" rel="noopener" aria-label="TikTok">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M16.5 3c.3 1.9 1.6 3.4 3.5 3.7v2.6c-1.3-.1-2.5-.5-3.5-1.2v6.2c0 3-2.4 5.4-5.4 5.4S5.7 17.3 5.7 14.3c0-2.8 2.1-5.1 4.8-5.4v2.7c-1.2.3-2.1 1.4-2.1 2.7 0 1.5 1.3 2.8 2.8 2.8s2.8-1.3 2.8-2.8V3h2.5z"></path>
+      </svg>
+    </a>
+    <a class="social-icon" href="mailto:radvalance.creates@gmail.com" aria-label="Email Rad Valance">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="3" y="5" width="18" height="14" rx="2.5"></rect>
+        <path d="M4 7l8 6 8-6"></path>
+      </svg>
+    </a>
+  </div>
+
+  <nav class="links" aria-label="Rad Valance's links">
+    <a class="link-card" style="--accent: var(--red)" href="ugc/">
+      <span class="bar"></span>
+      <span class="link-body">
+        <span class="link-label">collabs + brands</span>
+        <span class="link-title">UGC Portfolio</span>
+      </span>
+      <span class="link-state">view portfolio</span>
+    </a>
+
+    <a class="link-card" style="--accent: var(--red)" href="https://eagerglory.com" target="_blank" rel="noopener">
+      <span class="bar"></span>
+      <span class="link-body">
+        <span class="link-label">clothing brand</span>
+        <span class="link-title">Eager Glory</span>
+      </span>
+      <span class="link-state">visit site</span>
+    </a>
+
+    <a class="link-card" style="--accent: var(--red)" href="https://app.showcast.com.au/profile/radvalance" target="_blank" rel="noopener">
+      <span class="bar"></span>
+      <span class="link-body">
+        <span class="link-label">acting materials</span>
+        <span class="link-title">Showcast</span>
+      </span>
+      <span class="link-state">view profile</span>
+    </a>
+  </nav>
+</main>

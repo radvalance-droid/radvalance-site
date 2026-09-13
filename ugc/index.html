@@ -1,0 +1,583 @@
+<title>Rad Valance UGC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  @font-face {
+    font-family: "Reservoir Grunge";
+    src: url("reservoirgrunge.ttf") format("truetype");
+    font-weight: 400;
+    font-display: swap;
+  }
+
+  :root {
+    --ink: #000000;
+    --surface: #131313;
+    --surface-2: #1c1c1c;
+    --line: #34343477;
+    --paper: #f4efe9;
+    --muted: #a3a3a3;
+    --red: #e0453c;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-inline: clamp(20px, 5vw, 56px);
+  }
+
+  a { color: inherit; }
+
+  /* ---------- nav ---------- */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(0, 0, 0, 0.82);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 14px;
+  }
+  .nav-back {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    color: var(--muted);
+    transition: color 0.15s ease;
+  }
+  .nav-back:hover { color: var(--paper); }
+  .nav-back svg { width: 16px; height: 16px; }
+  .nav-links {
+    display: flex;
+    gap: 22px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.88rem;
+    color: var(--muted);
+    transition: color 0.15s ease;
+  }
+  .nav-links a:hover { color: var(--paper); }
+
+  /* ---------- hero ---------- */
+  .hero {
+    padding-block: clamp(40px, 8vw, 84px);
+    display: grid;
+    grid-template-columns: 1.1fr 0.8fr;
+    gap: clamp(28px, 5vw, 64px);
+    align-items: center;
+  }
+  @media (max-width: 760px) {
+    .hero { grid-template-columns: 1fr; padding-block: 36px 48px; }
+    .hero-media { order: -1; max-width: 220px; margin-inline: auto; }
+  }
+
+  .hero-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-family: "Reservoir Grunge", "Barlow Semi Condensed", sans-serif;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: clamp(3rem, 8vw, 4.6rem);
+    line-height: 0.95;
+    letter-spacing: 0.01em;
+    margin: 0 0 14px;
+    text-wrap: balance;
+  }
+
+  .hero-subtitle {
+    font-family: "Barlow Semi Condensed", sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    font-size: clamp(1rem, 2.4vw, 1.2rem);
+    color: var(--red);
+    margin: 0 0 26px;
+  }
+
+  .badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  .badge {
+    font-family: "Barlow Semi Condensed", sans-serif;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    background: var(--surface);
+    border-radius: 999px;
+    padding: 9px 18px;
+    cursor: default;
+    user-select: none;
+  }
+
+  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
+  .hero-media { text-align: center; }
+  .media-eyebrow {
+    font-family: "Barlow Semi Condensed", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin: 0 0 16px;
+  }
+  .media-cta {
+    margin-top: 34px;
+    cursor: default;
+    user-select: none;
+  }
+  .media-cta:hover { transform: none; }
+
+  .btn {
+    all: unset;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 24px;
+    border-radius: 999px;
+    font-size: 0.92rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn:focus-visible { outline: 2px solid var(--paper); outline-offset: 3px; }
+  .btn-solid { background: var(--red); color: #100403; }
+  .btn-outline { border: 1px solid var(--line); color: var(--paper); }
+  .btn-outline:hover { border-color: var(--paper); }
+
+  .phone {
+    position: relative;
+    width: 100%;
+    max-width: 260px;
+    aspect-ratio: 9 / 18.5;
+    margin-inline: auto;
+    border-radius: 34px;
+    background: #0c0c0c;
+    border: 2px solid #2a2a2a;
+    padding: 8px;
+    box-shadow: 0 30px 60px -20px rgba(224, 69, 60, 0.35);
+  }
+  .phone::before {
+    content: "";
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 46px;
+    height: 5px;
+    border-radius: 3px;
+    background: #2a2a2a;
+    z-index: 2;
+  }
+  .phone-screen {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 26px;
+    overflow: hidden;
+    background: #000;
+  }
+  .phone-screen video, .phone-screen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* ---------- section heading ---------- */
+  .section { padding-block: clamp(48px, 9vw, 96px); }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 34px;
+    flex-wrap: wrap;
+  }
+  .section-head h2 {
+    font-family: "Barlow Semi Condensed", sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    font-size: clamp(1.6rem, 4vw, 2.1rem);
+    margin: 0;
+  }
+  .section-head .section-note { color: var(--muted); font-size: 0.9rem; }
+  .section-head h2.grunge-heading {
+    font-family: "Reservoir Grunge", "Barlow Semi Condensed", sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    font-size: clamp(2rem, 5vw, 2.6rem);
+  }
+  .section-head-center {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+  }
+
+  /* ---------- about ---------- */
+  .about {
+    display: grid;
+    grid-template-columns: 0.7fr 1fr;
+    gap: clamp(28px, 5vw, 56px);
+    align-items: center;
+  }
+  @media (max-width: 700px) {
+    .about { grid-template-columns: 1fr; }
+  }
+  .about-photo {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #000;
+    border: 2px solid #ffffff;
+  }
+  .about-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 12%;
+    display: block;
+    filter:
+      drop-shadow(0 0 6px rgba(255, 255, 255, 0.55))
+      drop-shadow(0 0 18px rgba(255, 255, 255, 0.3))
+      drop-shadow(0 0 36px rgba(255, 255, 255, 0.16));
+  }
+  .about-body p {
+    color: var(--muted);
+    line-height: 1.7;
+    font-size: 1rem;
+    max-width: 52ch;
+  }
+  .about-body p + p { margin-top: 14px; }
+
+  /* ---------- work grid ---------- */
+  .work-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+  }
+  .work-row-grid {
+    display: grid;
+    gap: 36px;
+    justify-content: center;
+  }
+  .work-row-grid.cols-3 { grid-template-columns: repeat(3, 220px); }
+  .work-row-grid.cols-2 { grid-template-columns: repeat(2, 220px); }
+  @media (max-width: 760px) {
+    .work-row-grid.cols-3, .work-row-grid.cols-2 { grid-template-columns: 1fr; max-width: 260px; margin-inline: auto; }
+  }
+  .work-card { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .work-card .phone { max-width: 220px; }
+  .work-caption {
+    width: 100%;
+    max-width: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 3px;
+    font-size: 0.82rem;
+    color: var(--muted);
+    padding-inline: 2px;
+  }
+  .work-caption strong { color: var(--paper); font-weight: 500; }
+
+  /* ---------- drive samples ---------- */
+  .drive-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 18px;
+  }
+  .drive-logo { width: 56px; height: auto; }
+  .drive-block h2 {
+    font-family: "Barlow Semi Condensed", sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    font-size: clamp(1.6rem, 4vw, 2.1rem);
+    margin: 0;
+  }
+  .drive-link {
+    text-decoration: none;
+    color: var(--paper);
+    font-size: 0.95rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 12px 24px;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+  .drive-link:hover { border-color: var(--paper); transform: translateY(-2px); }
+  .drive-link:focus-visible { outline: 2px solid var(--paper); outline-offset: 3px; }
+
+  /* ---------- contact ---------- */
+  .cta-split {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: clamp(28px, 5vw, 56px);
+    align-items: center;
+  }
+  @media (max-width: 760px) {
+    .cta-split { grid-template-columns: 1fr; }
+  }
+
+  .cta-headline {
+    font-family: "Reservoir Grunge", "Space Grotesk", sans-serif;
+    font-weight: 400;
+    font-size: clamp(2.1rem, 5vw, 3.2rem);
+    line-height: 1.15;
+    letter-spacing: 0.01em;
+    margin: 0 0 28px;
+    text-wrap: balance;
+  }
+  .cta-headline em { font-style: italic; }
+
+  .cta-card {
+    background: var(--paper);
+    color: #17140f;
+    border-radius: 20px;
+    padding: clamp(24px, 4vw, 34px);
+  }
+  .cta-card h3 {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0 0 6px;
+  }
+  .cta-role {
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 0.82rem;
+    color: #5c564d;
+    margin: 0 0 26px;
+  }
+  .cta-card-links { display: flex; flex-direction: column; gap: 12px; }
+  .cta-card-links a {
+    color: #17140f;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-size: 0.98rem;
+    width: fit-content;
+    transition: color 0.15s ease;
+  }
+  .cta-card-links a:hover { color: var(--red); }
+  .cta-social-links { display: flex; gap: 18px; }
+
+  .cta-photo {
+    aspect-ratio: 4 / 5;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #000;
+    border: 2px solid #ffffff;
+    box-shadow: 0 30px 60px -20px rgba(224, 69, 60, 0.35);
+  }
+  .cta-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 15%;
+    display: block;
+  }
+
+  footer {
+    text-align: center;
+    padding-block: 32px 48px;
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+</style>
+
+<nav class="nav">
+  <div class="wrap nav-row">
+    <a class="nav-back" href="../">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+      rad valance
+    </a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="wrap hero">
+  <div class="hero-copy">
+    <h1>Rad Valance</h1>
+    <p class="hero-subtitle">Premium Content Creator</p>
+    <div class="badges">
+      <span class="badge">Melbourne, Australia</span>
+      <span class="badge">23 Years Old</span>
+      <span class="badge">12.7K Followers</span>
+    </div>
+  </div>
+  <div class="hero-media">
+    <p class="media-eyebrow">Creating since 2022</p>
+    <div class="phone">
+      <div class="phone-screen">
+        <video id="introVideo" src="videos/clip6.mp4" poster="posters/poster6.jpg" muted loop playsinline></video>
+      </div>
+    </div>
+    <span class="btn btn-solid media-cta">Get to know me!</span>
+  </div>
+</header>
+
+<section class="section wrap" id="about">
+  <div class="about">
+    <div class="about-photo">
+      <img src="about.png" alt="Rad Valance">
+    </div>
+    <div class="about-body">
+      <div class="section-head" style="margin-bottom:16px;">
+        <h2 class="grunge-heading">About Me</h2>
+      </div>
+      <p>Yo!</p>
+      <p>I've been making content since 2022, mainly for my clothing brand account Eager Glory. I've learned so much about content creation, what gets attention, how to retain that attention and convert to actual sales.</p>
+      <p>I've studied acting my whole life and am super confident in-front of the camera. I love infusing the art of storytelling into my work, whether it be short, organic-style Reels or full-blown aesthetic ads.</p>
+      <p>I look forward to using my unique experience to bring your next vision to life!</p>
+      <div class="cta-row" style="margin-top:22px;">
+        <a class="btn btn-solid" href="mailto:radvalance.creates@gmail.com">Book now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section wrap" id="work">
+  <div class="section-head section-head-center">
+    <h2 class="grunge-heading">Portfolio Videos</h2>
+  </div>
+  <div class="work-rows">
+    <div class="work-row-grid cols-3">
+      <div class="work-card">
+        <div class="phone">
+          <div class="phone-screen work-phone">
+            <video src="videos/clip2.mp4" poster="posters/poster2.jpg" muted loop playsinline></video>
+          </div>
+        </div>
+        <div class="work-caption"><strong>Lifestyle</strong><span>Big reveal/Product Demo</span></div>
+      </div>
+      <div class="work-card">
+        <div class="phone">
+          <div class="phone-screen work-phone">
+            <video src="videos/clip3.mp4" poster="posters/poster3.jpg" muted loop playsinline></video>
+          </div>
+        </div>
+        <div class="work-caption"><strong>Tech</strong><span>Unboxing</span></div>
+      </div>
+      <div class="work-card">
+        <div class="phone">
+          <div class="phone-screen work-phone">
+            <video src="videos/clip4.mp4" poster="posters/poster4.jpg" muted loop playsinline></video>
+          </div>
+        </div>
+        <div class="work-caption"><strong>Fitness</strong><span>Problem / Solution</span></div>
+      </div>
+    </div>
+    <div class="work-row-grid cols-2">
+      <div class="work-card">
+        <div class="phone">
+          <div class="phone-screen work-phone">
+            <video src="videos/clip5.mp4" poster="posters/poster5.jpg" muted loop playsinline></video>
+          </div>
+        </div>
+        <div class="work-caption"><strong>Fitness</strong><span>Testimonial</span></div>
+      </div>
+      <div class="work-card">
+        <div class="phone">
+          <div class="phone-screen work-phone">
+            <video src="videos/clip1.mp4" poster="posters/poster1.jpg" muted loop playsinline></video>
+          </div>
+        </div>
+        <div class="work-caption"><strong>Male Wellness</strong><span>Before/After + Product Demo</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section wrap">
+  <div class="drive-block">
+    <svg class="drive-logo" viewBox="0 0 87.3 78" aria-hidden="true">
+      <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
+      <path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z" fill="#00ac47"/>
+      <path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.5l5.85 11.5z" fill="#ea4335"/>
+      <path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/>
+      <path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/>
+      <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/>
+    </svg>
+    <h2>Download Samples</h2>
+    <a class="drive-link" href="https://drive.google.com/drive/folders/12WIbamIXefab7-NpfNh3Hxj_6anWIDKN?usp=drive_link" target="_blank" rel="noopener">Open the Google Drive folder</a>
+  </div>
+</section>
+
+<section class="section wrap" id="contact">
+  <div class="cta-split">
+    <div class="cta-copy">
+      <h2 class="cta-headline">let's create content your audience <em>actually</em> wants to watch.</h2>
+      <div class="cta-card">
+        <h3>Work with Rad Valance</h3>
+        <p class="cta-role">UGC Creator</p>
+        <div class="cta-card-links">
+          <a href="mailto:radvalance.creates@gmail.com">radvalance.creates@gmail.com</a>
+          <div class="cta-social-links">
+            <a href="https://www.tiktok.com/@radvalance" target="_blank" rel="noopener">TikTok</a>
+            <a href="https://www.instagram.com/radvalance/" target="_blank" rel="noopener">Instagram</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cta-photo">
+      <img src="cta.jpg" alt="Rad Valance">
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Rad Valance</footer>
+
+<script>
+  document.querySelectorAll('.phone-screen').forEach(function (screen) {
+    var video = screen.querySelector('video');
+    if (!video) return;
+    screen.addEventListener('mouseenter', function () { video.controls = true; });
+    screen.addEventListener('mouseleave', function () { video.controls = false; });
+    screen.addEventListener('touchstart', function () { video.controls = true; }, { passive: true });
+  });
+</script>
+
